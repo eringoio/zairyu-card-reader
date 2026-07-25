@@ -35,6 +35,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
 
+      - name: Install Ubuntu PC/SC build prerequisites
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes swig libpcsclite-dev
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
