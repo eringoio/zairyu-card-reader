@@ -1,0 +1,106 @@
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Weekly, so a newly published advisory surfaces without waiting for a commit.
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-audit:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install pip-audit
+      - name: Audit the pinned runtime set
+        # pip-audit sends package names and versions to the advisory database. It does not
+        # upload source. Never point it at anything that would reveal repository contents.
+        run: pip-audit --requirement requirements.lock.txt --strict --progress-spinner off
+
+  secret-scan:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  card-data-scan:
+    name: No card data or personal paths
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Search for material that must never be committed
+        shell: bash
+        run: |
+          set -uo pipefail
+          fail=0
+
+          # Key material and card dumps.
+          if find . -path ./.git -prune -o \( -name '*.key' -o -name '*.pem' -o -name '*.pfx' \
+               -o -name '*.p12' -o -name '*.bin' -o -name '*smrsapub*' \) -print | grep -q .; then
+            echo "::error::key-like or specified-card material found"
+            find . -path ./.git -prune -o \( -name '*.key' -o -name '*.pem' -o -name '*.pfx' \
+              -o -name '*.p12' -o -name '*.bin' -o -name '*smrsapub*' \) -print
+            fail=1
+          fi
+
+          # Developer machine paths. C:\Users\staff is an intentional test placeholder.
+          if grep -rEIn "[Cc]:[\\\\/]+[Uu]sers[\\\\/]+(?!staff)[A-Za-z0-9._-]+|/mnt/[a-z]/Projects|[A-Za-z]:[\\\\/]+Projects[\\\\/]" \
+               --exclude-dir=.git . 2>/dev/null | grep -v 'Users.staff' | grep -q .; then
+            echo "::error::a developer machine path is committed"
+            grep -rEIn "[Cc]:[\\\\/]+[Uu]sers[\\\\/]+[A-Za-z0-9._-]+|/mnt/[a-z]/Projects|[A-Za-z]:[\\\\/]+Projects[\\\\/]" \
+              --exclude-dir=.git . 2>/dev/null | grep -v 'Users.staff' || true
+            fail=1
+          fi
+
+          # Out-of-scope integrations that were deliberately removed.
+          if grep -rIn -i "schoolmanagement" --exclude-dir=.git . | grep -q .; then
+            echo "::error::a removed integration reference has returned"
+            fail=1
+          fi
+
+          exit $fail
+
+  privacy-invariants:
+    name: Privacy and local-only invariants
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt -r requirements-dev.txt
+      - name: Privacy, local-networking, trust-anchor and OCR manifest tests
+        # These are the tests that encode the product's privacy and security rules. They
+        # run in the matrix job too; naming them separately means a failure here says
+        # which guarantee broke, rather than "some test failed".
+        run: |
+          pytest -q \
+            tests/test_policy.py \
+            tests/test_local_guard.py \
+            tests/test_local_web_security.py \
+            tests/test_card_read_serialisation.py \
+            tests/test_local_config.py \
+            tests/test_trust_store.py \
+            tests/test_packaged_assets_integrity.py \
+            tests/test_fetch_ocr_assets.py \
+            tests/test_launcher.py
+      - name: No OCR module may import subprocess or tempfile
+        run: |
+          pytest -q tests/test_onnx_ocr.py -k "process_or_temporary_file or powershell_helper"

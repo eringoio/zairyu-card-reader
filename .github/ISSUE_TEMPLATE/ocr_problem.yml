@@ -1,0 +1,114 @@
+name: OCR problem
+description: The name or address was misread, truncated, or not read at all.
+labels: ["ocr"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ Never post real names, addresses, or card images
+
+        This is the issue type where it is easiest to leak personal data by accident,
+        because the problem *is* a real person's name or address.
+
+        **Do not post:**
+
+        - the real name or address that was misread;
+        - a photograph, scan, or crop of a real card;
+        - a screenshot showing real card data;
+        - raw OCR text.
+
+        **Describe the shape of the problem instead.** That is genuinely enough to
+        diagnose it. For example:
+
+        > A 22-character Latin name in three words was returned with a space inserted
+        > inside the second word, and the final two characters were cut off.
+
+        > A Kyoto address containing 通 was split so that the street name was attached to
+        > the municipality field.
+
+        If you want to show a concrete example, invent one of the same shape using
+        synthetic values.
+
+        ---
+
+        **Please read [docs/ocr.md](../../docs/ocr.md) first.** Some behaviour is a known
+        limitation rather than a bug: names and addresses on certain card generations are
+        stored as images and are OCR-derived, and every OCR field is meant to be reviewed
+        against the card. The application has no field for typing a name or address —
+        corrections happen in the destination system after pasting.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: I have not included any real name, address, card image, or other personal information in this report.
+          required: true
+        - label: I have read the known OCR limitations in docs/ocr.md.
+          required: true
+  - type: dropdown
+    id: field
+    attributes:
+      label: Which field?
+      options:
+        - Name
+        - Address
+        - Both
+    validations:
+      required: true
+  - type: dropdown
+    id: symptom
+    attributes:
+      label: What went wrong?
+      options:
+        - Nothing was read ("Could not be read" / 読み取れませんでした)
+        - Characters omitted
+        - Characters misrecognised
+        - Spaces inserted in the wrong place
+        - Value truncated
+        - Address split into the wrong fields
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: shape
+    attributes:
+      label: Describe the shape of the problem
+      description: >-
+        Length, script (Latin / kana / kanji), number of words, where the error occurred —
+        without the actual value.
+      placeholder: >-
+        A 30-character Latin name in four words. The third word lost its final two letters,
+        and a space appeared between the first and second letters of the fourth word.
+    validations:
+      required: true
+  - type: dropdown
+    id: staged
+    attributes:
+      label: Is the OCR model staged?
+      description: >-
+        If nothing is read at all, run `python tools/verify_ocr_assets.py`. From the
+        released package the model is always bundled.
+      options:
+        - "Released package — model is bundled"
+        - "From source — verify_ocr_assets.py passes"
+        - "From source — verify_ocr_assets.py fails"
+        - "Not sure"
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Safe OCR diagnostics
+      description: >-
+        The application's "Show OCR diagnostics" panel reports status, engine, model,
+        confidence, row count, and image dimensions. It deliberately shows **no** image and
+        **no** OCR text, so it is safe to paste in full.
+      render: text
+  - type: dropdown
+    id: generation
+    attributes:
+      label: Card generation
+      options:
+        - First generation (current/old card)
+        - Second generation
+        - Not sure

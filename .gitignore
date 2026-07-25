@@ -1,0 +1,46 @@
+# Python
+.venv/
+.venv_linux/
+test_env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editors
+.vscode/
+.idea/
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Local output that can contain card-derived material
+*.log
+debug_traces/
+
+# PyInstaller Windows distribution output
+build/
+dist/
+*.manifest
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Staged OCR model artifacts.
+#
+# `model.onnx` is 76 MB and would dominate the repository and its history for the life of
+# the project. Stage it with `tools/fetch_ocr_assets.ps1` (or `tools/fetch_ocr_assets.py`),
+# which downloads the pinned upstream revision and verifies every artifact against the
+# tracked `resources/ocr/ppocrv6/manifest.json` before installing it.
+#
+# `manifest.json` itself stays tracked deliberately: it holds the reviewed SHA-256 values,
+# and ignoring it would leave nothing to verify a download against.
+resources/ocr/ppocrv6/model.onnx
+resources/ocr/ppocrv6/inference.yml
+resources/ocr/ppocrv6/dictionary.txt

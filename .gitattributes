@@ -1,0 +1,32 @@
+# Line endings.
+#
+# This matters more than usual here: several files are verified byte-for-byte against a
+# SHA-256 recorded in a manifest. If Git rewrites their line endings on checkout, the
+# checksum no longer matches and the application refuses to load them — which is exactly
+# what happened before this file existed. OCR failed outright on Windows checkouts, and
+# `scripts\build_windows.ps1` failed its release gate, because `core.autocrlf` had
+# converted every LF in `inference.yml` and `dictionary.txt` to CRLF.
+
+# Store text as LF in the repository and check it out as LF everywhere.
+* text=auto eol=lf
+
+# Windows batch and PowerShell scripts need CRLF in the working tree.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Checksum-verified assets: never transform these, in either direction.
+resources/ocr/ppocrv6/** -text
+resources/moj/trust-anchors/** -text
+docs/external/moj/certs/** -text
+
+# Byte-exact expected output for the fixed copy-text contract.
+tests/fixtures/text_export/*.txt -text
+
+# Binary formats.
+*.onnx binary
+*.zip  binary
+*.crt  binary
+*.ico  binary
+*.png  binary
+*.pdf  binary

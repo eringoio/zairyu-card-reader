@@ -1,0 +1,20 @@
+# Current State
+
+`zairyu-card-reader 0.2.1`
+
+The application is one staff-facing local screen. It selects a PC/SC reader, checks a card, performs a real or explicitly enabled development mock scan, displays exactly 17 staff fields, shows separate OCR/signature review warnings, and copies one or multiple cards as fixed Japanese tab-separated text. The normal Windows package starts the local FastAPI process on `127.0.0.1:8787` and displays that screen in WebView2 on supported desktop Windows, or in installed Chromium app mode on Windows Server 2016 and after WebView2 startup failure.
+
+The app has no remote dashboard or browser diagnostic surface. Existing legacy configurations are replaced by local-only configuration while preserving `reader_id`. `--chrome-app` and `--webview` force the two application-style shells. `--browser` is a last fallback and `--no-browser`/legacy `--headless` are server-only modes; neither is the normal staff launch path.
+
+Hardware verification on authorized old-generation and RC2 cards remains required before production use.
+
+Types `1` and `2` now have a separate official-format first-generation RSA verifier, using
+only the pinned first-generation production CA set. Its synthetic implementation status is
+`implemented_unverified_on_real_hardware`; no authorized physical first-generation card has
+been tested by this repository.
+
+The packaged offline trust store now includes all four official first-generation production
+CA certificates, the normal second-generation CA2, and a separately selected official-test
+CA2. Normal operation uses `production`; `official_test` is an explicit local configuration
+with persistent UI warning and cannot produce a production-authenticity result. No physical
+production or official sample card has been used by this repository's automated tests.

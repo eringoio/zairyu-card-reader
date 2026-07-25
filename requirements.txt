@@ -1,0 +1,37 @@
+# Runtime dependencies.
+#
+# Direct dependencies only, each with a floor and a ceiling. The ceiling matters: this
+# application verifies government certificates and reads personal data, so a major-version
+# jump should be a deliberate, tested upgrade rather than something that happens to
+# whoever installs next.
+#
+# For a reproducible install, use the lockfile instead:
+#
+#     pip install -r requirements.lock.txt
+#
+# Development and build tooling lives in requirements-dev.txt and is neither installed on
+# a staff machine nor bundled into the released package.
+
+# Local HTTP application and server.
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+
+# PC/SC card reader access. LGPL-2.1-or-later; see THIRD_PARTY_NOTICES.md.
+pyscard>=2.0,<3
+
+# Card secure messaging: AES, CMAC, 3DES.
+pycryptodome>=3.20,<4
+
+# Certificate parsing and RSA/ECDSA signature verification.
+cryptography>=42,<50
+pyasn1>=0.6,<0.7
+pyasn1-modules>=0.4,<0.5
+
+# Local OCR: image preprocessing and ONNX Runtime CPU inference.
+pillow>=10,<14
+onnxruntime>=1.17,<2
+numpy>=1.24,<3
+PyYAML>=6,<7
+
+# The WebView2 desktop window.
+pywebview>=5.0,<7

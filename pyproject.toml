@@ -1,0 +1,96 @@
+# Lint configuration.
+#
+# This project is not distributed as a Python package — the deliverable is a PyInstaller
+# one-folder Windows build — so there is deliberately no [project] or [build-system] table
+# here. This file exists to configure tooling.
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["resources", "docs"]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "F",      # pyflakes: undefined names, unused imports and variables
+    "I",      # import ordering
+    "B",      # bugbear: likely bugs
+    "UP",     # pyupgrade
+    "PIE",    # unnecessary constructs
+    "RUF",    # ruff-specific checks
+    "S",      # bandit security checks
+    "TRY",    # exception-handling antipatterns
+]
+
+ignore = [
+    # Broad `except Exception` is the deliberate design on the card-reading, OCR and
+    # signature paths, not an oversight. A parse failure on card-derived bytes must
+    # produce a classified, card-free status rather than propagate an exception whose
+    # text can quote ASN.1 offsets, image data, or field values. Narrowing these would
+    # mean either enumerating every failure mode a malformed card can produce, or letting
+    # one escape. See docs/privacy-and-security.md.
+    "BLE001",  # blind-except
+    "TRY002",  # raising a plain Exception
+    "TRY003",  # long message in a raise
+    "TRY300",  # return in try rather than else
+
+    # `try: ... except: pass` is used for genuinely best-effort cleanup — chmod on a
+    # config file, terminating a browser process that may already be gone. Failing there
+    # would be worse than continuing.
+    "S110",    # try-except-pass
+
+    # Timestamps shown to staff and written into diagnostic traces are deliberately local
+    # time; a naive datetime is correct for a single-PC, single-timezone tool.
+    "DTZ005",
+
+    # Long, deliberately dense literal lines in the display and API layers keep one
+    # concept on one line. Reflowing them is churn without benefit.
+    "E501",
+
+    # This application's user interface, card data, and much of its documentation are in
+    # Japanese. Full-width punctuation and kana are the correct characters here, not
+    # "ambiguous unicode" to be replaced with ASCII lookalikes.
+    "RUF001",
+    "RUF002",
+    "RUF003",
+
+    # `raise` inside `try` is idiomatic in the protocol layer, where a guard clause and the
+    # operation it guards belong in the same block.
+    "TRY301",
+
+    # Stylistic preferences that would mean rewriting working, tested code for no
+    # behavioural gain. Left off deliberately rather than by omission.
+    "RUF005",  # list concatenation vs unpacking
+    "RUF059",  # unused unpacked variable, where the tuple shape documents the protocol
+    "TRY004",  # ValueError vs TypeError on a malformed config file
+    "TRY203",  # a re-raising handler that documents which errors are expected
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "S101",   # assert is the point of a test
+    "S105",   # "password"-looking strings are synthetic test values
+    "S106",
+    "S104",   # tests assert that binding to 0.0.0.0 is REFUSED; the literal must appear
+    "E402",   # sys.path manipulation before importing a tool module
+    "E702",   # compact one-line setup in table-driven tests
+]
+"app.py" = [
+    "S105",   # TOKEN_PLACEHOLDER is a substitution marker, not a credential
+]
+"reader/local_guard.py" = [
+    "S105",   # TOKEN_HEADER is an HTTP header name, not a credential
+]
+"tools/*" = [
+    "S310",   # urllib against a pinned, hash-verified upstream URL is the tool's job
+    "E402",
+    "B007",   # index-only loops in the benchmark's edit-distance implementation
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["reader", "app", "launch_reader"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Tests must never require a reader, a card, a network connection, or a smart-card service.
+addopts = "-q"

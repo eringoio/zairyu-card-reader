@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "model_name": "PP-OCRv6_medium_rec",
+  "source": "PaddlePaddle/PP-OCRv6_medium_rec_onnx",
+  "source_revision": "4ca479517810450af7bcff5bac0e6c4616987d51",
+  "source_url": "https://huggingface.co/PaddlePaddle/PP-OCRv6_medium_rec_onnx/resolve/4ca479517810450af7bcff5bac0e6c4616987d51",
+  "license": "Apache-2.0",
+  "model_file": "model.onnx",
+  "model_sha256": "9c09abf0957f7968c7586464b7397b84ad2387a0497a351af40e9acc71b673ba",
+  "metadata_file": "inference.yml",
+  "metadata_sha256": "991b700facf5b50a7de193468207d5f4255b538dde0d312ae3b7c7a9b6873129",
+  "dictionary_file": "dictionary.txt",
+  "dictionary_sha256": "b5f2bfe2bdd9448429e3e82b51c789775d9b42f2403d082b00662eb77e401c5d",
+  "image_mode": "BGR",
+  "input_dimensions": [
+    3,
+    48,
+    320
+  ],
+  "postprocess": "CTCLabelDecode",
+  "dictionary_entries": 18708
+}

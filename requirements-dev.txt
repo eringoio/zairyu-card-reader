@@ -1,0 +1,23 @@
+# Development and build tooling.
+#
+# Not installed on a staff machine. `pytest` is explicitly excluded from the PyInstaller
+# bundle in zairyu-reader.spec.
+#
+#     pip install -r requirements.txt -r requirements-dev.txt
+
+-r requirements.txt
+
+# Test suite. Also provides the ASGI test client used by the web-security tests.
+pytest>=8,<10
+httpx>=0.27,<1
+
+# Windows packaging. GPL-2.0-or-later with a bootloader exception; see
+# THIRD_PARTY_NOTICES.md.
+pyinstaller>=6.6,<7
+
+# Linting.
+ruff>=0.6,<1
+
+# Dependency vulnerability auditing. Queries the PyPI advisory database with package names
+# and versions only; it does not upload source.
+pip-audit>=2.7,<3

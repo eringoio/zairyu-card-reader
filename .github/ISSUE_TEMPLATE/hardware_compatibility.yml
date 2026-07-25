@@ -1,0 +1,101 @@
+name: Hardware compatibility
+description: A reader, driver, or Windows environment that does or does not work.
+labels: ["hardware"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ Never post real residence-card data
+
+        This is a **public** issue tracker. Do not post card photographs, screenshots of
+        real card data, real names, addresses, dates of birth, or card numbers, APDU/TLV/IC
+        dumps, card certificates or signatures, or logs containing any of these. Use
+        synthetic values.
+
+        ---
+
+        Reader compatibility reports are genuinely useful — both successes and failures.
+        Residence cards are **contactless ISO/IEC 14443 Type B**, and a reader that handles
+        FeliCa, MIFARE, or Type A only will not work. A confirmed-working model helps the
+        next person choose correctly.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: I have not included any real residence-card data, image, or personal information in this report.
+          required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Outcome
+      options:
+        - Works — reads cards successfully
+        - Partially works — reader detected, card read fails
+        - Does not work — reader not detected at all
+    validations:
+      required: true
+  - type: input
+    id: reader
+    attributes:
+      label: Reader make and model
+      placeholder: e.g. SONY RC-S380 / ACS ACR1252U
+    validations:
+      required: true
+  - type: input
+    id: reader-name
+    attributes:
+      label: Name Windows shows for the reader
+      description: The string in Device Manager, or in the application's reader list.
+      placeholder: e.g. Sony FeliCa Port/PaSoRi 3.0 0
+  - type: dropdown
+    id: type-b
+    attributes:
+      label: Does the manufacturer state ISO/IEC 14443 Type B support?
+      options:
+        - "Yes"
+        - "No"
+        - "Not stated / unknown"
+    validations:
+      required: true
+  - type: input
+    id: driver
+    attributes:
+      label: Driver version
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: e.g. Windows 11 24H2, or Windows Server 2016 with Desktop Experience
+    validations:
+      required: true
+  - type: dropdown
+    id: generation
+    attributes:
+      label: Which card generation did you test?
+      description: >-
+        Do not include the card number or any card data — only which generation it was.
+      multiple: true
+      options:
+        - First generation (current/old card)
+        - Second generation
+        - Not sure
+  - type: textarea
+    id: stage
+    attributes:
+      label: How far did it get?
+      description: >-
+        Reader listed? Card detected? Read started? Fields returned? Signature verified?
+        Include the exact error code if there was one (for example `0x80100066`).
+    validations:
+      required: true
+  - type: dropdown
+    id: other-app
+    attributes:
+      label: Can another known-good reader application read the same card?
+      description: >-
+        This separates a reader or driver problem from an application problem.
+      options:
+        - "Yes"
+        - "No"
+        - "Not tried"

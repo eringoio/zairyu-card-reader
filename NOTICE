@@ -1,0 +1,68 @@
+zairyu-card-reader
+Copyright 2026 Eringo.io
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+--------------------------------------------------------------------------------
+SCOPE OF THIS LICENCE
+--------------------------------------------------------------------------------
+
+The Apache License 2.0 above applies to the software in this repository: the
+application source, tests, tooling, build scripts, and documentation authored for
+this project.
+
+It does NOT apply to material published by third parties that is distributed with
+or alongside this project. In particular:
+
+  * Public key certificates published by the Immigration Services Agency of Japan,
+    under resources/moj/trust-anchors/ and docs/external/moj/certs/. These remain
+    subject to the terms of their publisher. See docs/official-certificates.md.
+
+  * The PP-OCRv6 recognition model and its metadata, which are licensed under the
+    Apache License 2.0 by their own authors and are not tracked in this repository.
+    See docs/third-party-notices.md.
+
+  * Any dependency installed from a package index, each under its own licence.
+
+Applying this project's licence to government-published material would be
+incorrect, and is not intended by this file.
+
+--------------------------------------------------------------------------------
+THIRD-PARTY COMPONENTS
+--------------------------------------------------------------------------------
+
+This product includes software and data developed by third parties. The complete
+list, with sources, versions, licences and notice requirements, is in:
+
+    THIRD_PARTY_NOTICES.md
+
+Summary of components with notice obligations:
+
+  * PP-OCRv6_medium_rec (PaddlePaddle) — Apache-2.0. Staged, not tracked; bundled
+    in the released Windows package.
+  * ONNX Runtime (Microsoft) — MIT. Bundled in the released Windows package.
+  * pyscard — LGPL-2.1-or-later. Used unmodified through its public API.
+  * cryptography (PyCA) — Apache-2.0 or BSD-3-Clause.
+  * FastAPI, Uvicorn, Pillow, NumPy, PyYAML, pywebview, pycryptodome, pyasn1,
+    pyasn1-modules — permissive licences, listed in THIRD_PARTY_NOTICES.md.
+
+--------------------------------------------------------------------------------
+NON-AFFILIATION
+--------------------------------------------------------------------------------
+
+This project is independently developed and is not affiliated with, endorsed by,
+approved by, or certified by the Immigration Services Agency of Japan or the
+Ministry of Justice.
+
+本プロジェクトは独自に開発されたものであり、出入国在留管理庁または法務省が開発、
+承認、推奨、認証しているものではありません。

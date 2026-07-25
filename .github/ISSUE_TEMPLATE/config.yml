@@ -1,0 +1,18 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability (private)
+    url: https://github.com/security/advisories
+    about: >-
+      Do NOT open a public issue for anything that could expose card data. Use GitHub's
+      private vulnerability reporting on this repository (Security → Report a
+      vulnerability). See SECURITY.md.
+  - name: Read the privacy statement first
+    url: https://github.com/
+    about: >-
+      PRIVACY.md explains what is read from a card, what is never read, and what leaves the
+      machine. Many questions are answered there.
+  - name: Troubleshooting guide
+    url: https://github.com/
+    about: >-
+      docs/troubleshooting.md covers "no reader found", card activation errors (0x80100066,
+      0x80100069), OCR problems, and signature statuses.
