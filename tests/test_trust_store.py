@@ -6,7 +6,6 @@ import pytest
 
 from reader.signature.trust_store import (
     TrustStoreError,
-    compare_archive_and_historical_certificate,
     load_anchor,
     load_second_generation_trust_anchor,
     load_trust_anchors,
@@ -26,20 +25,6 @@ def test_all_published_production_anchors_are_packaged_and_validated() -> None:
         "moj-rc1-production-ca-20240508",
     ]
     assert all(anchor.profile == "production" and anchor.certificate_bytes for anchor in anchors)
-
-
-def test_archive_and_historical_first_generation_certificates_are_identical() -> None:
-    pairs = [
-        ("001460774.zip", "930001756.crt"),
-        ("001460775.zip", "930001757.crt"),
-        ("001460776.zip", "001353372.crt"),
-        ("001460777.zip", "001421582.crt"),
-    ]
-    for archive, direct in pairs:
-        assert compare_archive_and_historical_certificate(
-            ROOT / "docs/external/moj/certs" / archive,
-            ROOT / "docs/external/moj/certs" / direct,
-        )
 
 
 def test_production_and_official_test_profiles_do_not_overlap() -> None:

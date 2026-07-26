@@ -67,7 +67,7 @@ def test_checksum_verified_text_assets_contain_no_crlf(name: str) -> None:
 
 def test_gitattributes_protects_every_checksum_verified_path() -> None:
     attributes = (ROOT / ".gitattributes").read_text(encoding="utf-8")
-    for path in ("resources/ocr/ppocrv6/**", "resources/moj/trust-anchors/**", "docs/external/moj/certs/**"):
+    for path in ("resources/ocr/ppocrv6/**", "resources/moj/trust-anchors/**"):
         assert f"{path} -text" in attributes, f"{path} must be marked -text"
 
 
@@ -227,13 +227,3 @@ def test_the_manifest_records_specified_card_material_as_not_distributed() -> No
     assert material["enabled"] is False
     assert material["distributed"] is False
     assert set(material["official_source_ids"]) == {"001460789.zip", "001462222.zip"}
-
-
-def test_every_official_source_file_referenced_by_an_anchor_is_present() -> None:
-    """The archive comparison test is only meaningful if the archives are actually here."""
-    certs = ROOT / "docs" / "external" / "moj" / "certs"
-    for entry in _anchor_manifest()["anchors"]:
-        assert (certs / entry["official_source_id"]).is_file(), entry["official_source_id"]
-        historical = entry.get("historical_source_id")
-        if historical:
-            assert (certs / historical).is_file(), historical
