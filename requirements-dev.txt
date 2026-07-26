@@ -13,7 +13,7 @@ httpx>=0.27,<1
 
 # Windows packaging. GPL-2.0-or-later with a bootloader exception; see
 # THIRD_PARTY_NOTICES.md.
-pyinstaller>=6.6,<7
+pyinstaller>=6.21.0,<7
 
 # Linting.
 ruff>=0.6,<1
