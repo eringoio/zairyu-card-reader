@@ -93,6 +93,10 @@ Timestamp service:   _________________________________________________________
 **The automated suite proves none of this.** Run these with authorised cards on the target
 hardware and record what you observed. Do not carry results forward from a previous release.
 
+The recorded field-test observations for the current `0.2.1` release candidate are in
+[docs/release-records/0.2.1.md](docs/release-records/0.2.1.md). Reconfirm the relevant
+checks after producing the final signed archive.
+
 ### Environment
 
 ```text

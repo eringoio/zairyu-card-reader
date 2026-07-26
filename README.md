@@ -39,13 +39,15 @@ cloud, and no network traffic of any kind while a card is being read.
 
 ## Field testing
 
-> The maintainer has field-tested this application with more than 60 genuine Japanese
-> residence cards. Structured IC-chip fields and signature verification worked correctly
-> during those tests. Results may still differ depending on card generation, card condition,
-> NFC reader, reader driver, operating system, and OCR environment.
+> The maintainer has field-tested this application with more than 60 newer-generation and
+> about 10 older-generation genuine Japanese residence cards, using a Sony FeliCa RC-S300
+> reader on Windows 10, Windows 11, and Windows Server 2016. Structured IC-chip fields and
+> signature verification worked correctly during those tests. Results may still differ
+> depending on card generation, card condition, NFC reader, reader driver, operating system,
+> and OCR environment.
 
-The automated test suite uses synthetic data only. It cannot prove reader compatibility,
-driver behaviour, Windows Server 2016 support, or OCR quality on your hardware.
+The automated test suite uses synthetic data only. Field testing is useful evidence, but it
+does not guarantee reader compatibility, driver behaviour, or OCR quality on your hardware.
 
 ## OCR is imperfect, and every OCR field must be reviewed
 
@@ -57,6 +59,8 @@ using the result.** Known problems include:
 - long names being partially cut off;
 - omitted or incorrectly recognised name characters;
 - incorrect address segmentation;
+- an incorrect final address line after the prefecture and municipality;
+- place names containing complex kanji being misrecognised;
 - omitted or incorrectly recognised address characters.
 
 This project makes no claim of perfect OCR accuracy.
@@ -91,6 +95,8 @@ Unless separately reviewed, this application does **not** support:
 - JPKI;
 - RSA delivery keys for specified cards — this material is not distributed with the project
   at all;
+- complete residence-status (在留資格) display mapping; staff must confirm the shown status
+  against the physical card;
 - remote or network reader operation.
 
 Card types `07` and `08` are refused by policy without attempting My Number or JPKI access.

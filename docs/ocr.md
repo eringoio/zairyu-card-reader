@@ -5,7 +5,7 @@
 Some residence-card generations store the holder's **name** and **address** as images
 rather than as text. Those two fields are therefore produced by OCR, and OCR gets things
 wrong. **Every OCR-derived field must be checked against the card in front of you before it
-is copied.**
+is used.**
 
 Known problems:
 
@@ -13,6 +13,8 @@ Known problems:
 - long names being partially cut off;
 - omitted or incorrectly recognised name characters;
 - incorrect address segmentation;
+- an incorrect final address line after the prefecture and municipality;
+- place names containing complex kanji being misrecognised;
 - omitted or incorrectly recognised address characters.
 
 既知の問題:
@@ -21,6 +23,8 @@ Known problems:
 - 長い氏名の一部が欠ける;
 - 氏名の文字が抜ける、または誤認識される;
 - 住所の区切りが誤る;
+- 都道府県・市区町村以降の住所が誤る;
+- 難しい漢字を含む地名が誤認識される;
 - 住所の文字が抜ける、または誤認識される。
 
 **This project makes no claim of perfect OCR accuracy.** The remaining fields — card number,
