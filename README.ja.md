@@ -13,6 +13,23 @@ Windows PC と USB NFC リーダーを使い、在留カードを**そのPCの�
 
 ---
 
+## このプロジェクトを作った理由
+
+**2026年6月14日以降に交付される新様式の在留カード**には、券面に在留期間が記載されません。
+出入国在留管理庁の2026年6月23日付のお知らせによると、当時の公式「在留カード等読取
+アプリケーション」でも在留期間は表示されませんでした。同庁は、在留期間、許可の種類、
+許可年月日を表示できる改修版を2026年9月頃に公開予定としています。
+[出入国在留管理庁のお知らせ](https://www.moj.go.jp/isa/11_00106.html)
+
+在留期間は、オンライン申請を含む在留手続で入力が必要になることがあります。そのため、
+留学生を支援する学校、外国人従業員を支援する企業、または自分の情報を確認したい外国籍の
+方にとって、必要な情報を確認しにくいという実務上の課題が生じます。
+[オンライン申請に関する案内](https://www.moj.go.jp/isa/11_00106.html)
+
+このアプリは、権限を持つ利用者が対応するカードに保存された情報を確認できるように作りました。
+重要な個人情報を扱うため、意図的にローカル専用としています。カード情報をサーバーへ送信せず、
+配布版でカードを読み取る際にインターネット接続は必要ありません。皆さまのお役に立てれば幸いです。
+
 ## できること
 
 - PC に接続された PC/SC カードリーダーを検出します。
@@ -196,17 +213,15 @@ Copyright 2026 Eringo.io
 | 概要 | [README.ja.md](README.ja.md) | [README.md](README.md) |
 | インストール | [docs/installation.ja.md](docs/installation.ja.md) | [docs/installation.md](docs/installation.md) |
 | ビルド | [docs/building.ja.md](docs/building.ja.md) | [docs/building.md](docs/building.md) |
-| プライバシー概要 | （本文書内） | [PRIVACY.md](PRIVACY.md) |
-| プライバシーとセキュリティ詳細 | — | [docs/privacy-and-security.md](docs/privacy-and-security.md) |
-| 脆弱性の報告 | — | [SECURITY.md](SECURITY.md) |
-| 開発への参加 | — | [CONTRIBUTING.md](CONTRIBUTING.md) |
-| OCR | — | [docs/ocr.md](docs/ocr.md) |
-| 署名検証 | — | [docs/signature-verification.md](docs/signature-verification.md) |
-| 公的証明書 | — | [docs/official-certificates.md](docs/official-certificates.md) |
-| トラブルシューティング | — | [docs/troubleshooting.md](docs/troubleshooting.md) |
-| アーキテクチャ | — | [docs/architecture.md](docs/architecture.md) |
-| ローカルAPI仕様 | — | [docs/api-contract.md](docs/api-contract.md) |
-| 決定ログ | — | [docs/decision-log.md](docs/decision-log.md) |
+| リリース作成 | [docs/releasing.ja.md](docs/releasing.ja.md) · [RELEASE_CHECKLIST.ja.md](RELEASE_CHECKLIST.ja.md) | [docs/releasing.md](docs/releasing.md) · [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) |
+| プライバシー | [PRIVACY.ja.md](PRIVACY.ja.md) | [PRIVACY.md](PRIVACY.md) |
+| プライバシーとセキュリティ | [docs/privacy-and-security.ja.md](docs/privacy-and-security.ja.md) | [docs/privacy-and-security.md](docs/privacy-and-security.md) |
+| 脆弱性の報告 | [SECURITY.ja.md](SECURITY.ja.md) | [SECURITY.md](SECURITY.md) |
+| 開発への参加 | [CONTRIBUTING.ja.md](CONTRIBUTING.ja.md) | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| OCR | [docs/ocr.ja.md](docs/ocr.ja.md) | [docs/ocr.md](docs/ocr.md) |
+| 署名検証 | [docs/signature-verification.ja.md](docs/signature-verification.ja.md) | [docs/signature-verification.md](docs/signature-verification.md) |
+| 公的証明書 | [docs/official-certificates.ja.md](docs/official-certificates.ja.md) | [docs/official-certificates.md](docs/official-certificates.md) |
+| トラブルシューティング | [docs/troubleshooting.ja.md](docs/troubleshooting.ja.md) | [docs/troubleshooting.md](docs/troubleshooting.md) |
 
 英語のみの文書については、上記の日本語READMEに、プライバシー上の警告、OCRの限界、署名検証の
 限界、対応範囲外の項目、モデルと証明書の準備、脆弱性報告、非関与の明示をすべて記載しています。

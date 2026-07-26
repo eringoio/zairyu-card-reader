@@ -14,6 +14,24 @@ cloud, and no network traffic of any kind while a card is being read.
 
 ---
 
+## Why this project exists
+
+New-format residence cards issued from **14 June 2026** do not print the period of stay on
+the card. As of the Immigration Services Agency's notice of 23 June 2026, the official
+Residence Card Reader application did not display that information either. The Agency has
+announced an updated official application around September 2026 to display the period of
+stay, permission type, and permission date. [Official notice](https://www.moj.go.jp/isa/11_00106.html)
+
+Period of stay can be a required input in immigration procedures, including the online
+application flow. This can create a practical problem for schools supporting international
+students, employers supporting foreign workers, and residents who need to confirm their own
+information. [Online-application guidance](https://www.moj.go.jp/isa/11_00106.html)
+
+I made this application to help authorised users review the information stored on compatible
+cards. It is intentionally local-only: card data is not sent to a server, and the released
+application needs no internet connection to read a card. I hope it is as useful to others as
+it has been to me.
+
 ## What it does
 
 - Detects PC/SC card readers connected to the PC.
@@ -203,18 +221,15 @@ Note that `pyscard` is LGPL-2.1-or-later; the other dependencies are permissive.
 | Overview | [README.md](README.md) | [README.ja.md](README.ja.md) |
 | Installation | [docs/installation.md](docs/installation.md) | [docs/installation.ja.md](docs/installation.ja.md) |
 | Building the package | [docs/building.md](docs/building.md) | [docs/building.ja.md](docs/building.ja.md) |
-| Making a release | [docs/releasing.md](docs/releasing.md) · [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) | — |
-| Privacy summary | [PRIVACY.md](PRIVACY.md) | (in [README.ja.md](README.ja.md)) |
-| Privacy and security detail | [docs/privacy-and-security.md](docs/privacy-and-security.md) | — |
-| Reporting a vulnerability | [SECURITY.md](SECURITY.md) | — |
-| Contributing | [CONTRIBUTING.md](CONTRIBUTING.md) | — |
-| OCR | [docs/ocr.md](docs/ocr.md) | — |
-| Signature verification | [docs/signature-verification.md](docs/signature-verification.md) | — |
-| Official certificates | [docs/official-certificates.md](docs/official-certificates.md) | — |
-| Troubleshooting | [docs/troubleshooting.md](docs/troubleshooting.md) | — |
-| Architecture | [docs/architecture.md](docs/architecture.md) | — |
-| Local API contract | [docs/api-contract.md](docs/api-contract.md) | — |
-| Decision log | [docs/decision-log.md](docs/decision-log.md) | — |
+| Making a release | [docs/releasing.md](docs/releasing.md) · [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) | [docs/releasing.ja.md](docs/releasing.ja.md) · [RELEASE_CHECKLIST.ja.md](RELEASE_CHECKLIST.ja.md) |
+| Privacy | [PRIVACY.md](PRIVACY.md) | [PRIVACY.ja.md](PRIVACY.ja.md) |
+| Privacy and security | [docs/privacy-and-security.md](docs/privacy-and-security.md) | [docs/privacy-and-security.ja.md](docs/privacy-and-security.ja.md) |
+| Reporting a vulnerability | [SECURITY.md](SECURITY.md) | [SECURITY.ja.md](SECURITY.ja.md) |
+| Contributing | [CONTRIBUTING.md](CONTRIBUTING.md) | [CONTRIBUTING.ja.md](CONTRIBUTING.ja.md) |
+| OCR | [docs/ocr.md](docs/ocr.md) | [docs/ocr.ja.md](docs/ocr.ja.md) |
+| Signature verification | [docs/signature-verification.md](docs/signature-verification.md) | [docs/signature-verification.ja.md](docs/signature-verification.ja.md) |
+| Official certificates | [docs/official-certificates.md](docs/official-certificates.md) | [docs/official-certificates.ja.md](docs/official-certificates.ja.md) |
+| Troubleshooting | [docs/troubleshooting.md](docs/troubleshooting.md) | [docs/troubleshooting.ja.md](docs/troubleshooting.ja.md) |
 
 ## Non-affiliation
 

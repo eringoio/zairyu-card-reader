@@ -97,8 +97,8 @@ The Python test suite runs on synthetic data. **It does not prove** Windows Serv
 compatibility, Chromium app-mode behaviour, ONNX Runtime or model compatibility on the
 target hardware, WebView2 behaviour, or reader-driver compatibility.
 
-Validate those manually on the target environment with authorised hardware. See
-[testing-matrix.md](testing-matrix.md).
+Validate those manually on the target environment with authorised hardware. Use the hardware
+section of the [release checklist](../RELEASE_CHECKLIST.md).
 
 ## Launcher lifecycle limitation
 

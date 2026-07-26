@@ -1,5 +1,7 @@
 # Security Policy
 
+**[日本語版 →](SECURITY.ja.md)**
+
 This application reads personal data from Japanese residence cards. Please treat any
 finding that could expose card data, face images, IC-chip material, or the loopback API as
 sensitive.

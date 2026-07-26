@@ -110,7 +110,7 @@ powershell -ExecutionPolicy Bypass -File tools\fetch_ocr_assets.ps1
 python tools\verify_ocr_assets.py
 ```
 
-詳細は [ocr.md](ocr.md)（英語）をご覧ください。
+詳細は [OCR](ocr.ja.md) をご覧ください。
 
 ---
 
@@ -121,7 +121,7 @@ python tools\verify_ocr_assets.py
 | Python 依存ライブラリのインストール（ソースの場合のみ） | **必要（1回のみ）** |
 | OCRモデルの取得（ソースの場合のみ） | **必要（1回のみ）** |
 | 配布パッケージの初回起動 | 不要 |
-| **カードの読み取り・署名検証・コピー** | **常に不要** |
+| **カードの読み取り・署名検証** | **常に不要** |
 
 セットアップ後、本アプリは外部への通信を一切行いません。行う通信は `127.0.0.1` 上にある
 自分自身のヘルスチェックのみです。
@@ -143,7 +143,7 @@ python tools\verify_ocr_assets.py
 
 同じ理由から、サーバーは `Host` ヘッダーの許可リストとプロセスごとのトークンも要求します。
 これにより、たまたま開いた Web ページからアクセスされることもありません。詳細は
-[privacy-and-security.md](privacy-and-security.md)（英語）をご覧ください。
+[プライバシーとセキュリティ](privacy-and-security.ja.md)をご覧ください。
 
 ---
 
@@ -169,7 +169,7 @@ python tools\verify_ocr_assets.py
 2. リーダー一覧に使用するリーダーが表示されること。
 3. カードを置いた状態で **カードを確認** を押すと、カードが検出されること。
 4. 「開発・テスト用サンプルデータを使う」にチェックを入れて1回読み取ると、17項目に明らかに
-   合成とわかる値（`SAMPLE NAME`、`SAMPLELAND`）が入ること。実在のカードを使わずに、UIと
-   コピー形式が正しく動くことを確認できます。
+   合成とわかる値（`SAMPLE NAME`、`SAMPLELAND`）が入ること。実在のカードを使わずに、UIの
+   表示が正しく動くことを確認できます。
 
-手順2または3が失敗する場合は [troubleshooting.md](troubleshooting.md)（英語）をご覧ください。
+手順2または3が失敗する場合は[トラブルシューティング](troubleshooting.ja.md)をご覧ください。

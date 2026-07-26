@@ -1,6 +1,6 @@
 # Privacy
 
-**日本語の要約は [README.ja.md](README.ja.md) にあります。**
+**[日本語版 →](PRIVACY.ja.md)**
 
 This document states plainly what the application reads, what it refuses to read, what it
 keeps, and what leaves the machine. It is written so a non-engineer responsible for a
