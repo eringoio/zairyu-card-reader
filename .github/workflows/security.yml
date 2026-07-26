@@ -69,7 +69,7 @@ jobs:
           fi
 
           # Out-of-scope integrations that were deliberately removed.
-          if grep -rIn -i "schoolmanagement" --exclude-dir=.git . | grep -q .; then
+          if grep -rIn -i "schoolmanagement" --exclude-dir=.git --exclude=security.yml . | grep -q .; then
             echo "::error::a removed integration reference has returned"
             fail=1
           fi
@@ -85,6 +85,10 @@ jobs:
         with:
           python-version: "3.13"
           cache: pip
+      - name: Install Ubuntu PC/SC build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes swig libpcsclite-dev
       - run: pip install -r requirements.txt -r requirements-dev.txt
       - name: Privacy, local-networking, trust-anchor and OCR manifest tests
         # These are the tests that encode the product's privacy and security rules. They

@@ -13,7 +13,7 @@ from reader.residence_card_reader import _old_card_front_review_fields, _old_car
 def _synthetic_old_card_front() -> bytes:
     image = Image.new("L", (720, 450), color=255)
     draw = ImageDraw.Draw(image)
-    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24)
+    font = ImageFont.load_default(size=24)
     # The left-side rectangle represents the portrait area and must not join text rows.
     draw.rectangle((20, 100, 160, 330), fill=80)
     for y, text in ((55, "NAME: YAMADA TARO"), (125, "2000-01-02 M"), (195, "SAMPLELAND")):
