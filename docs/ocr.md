@@ -28,8 +28,8 @@ dates, status, permissions — come from structured chip data, not from OCR, and
 subject to these problems.
 
 The application has no field for typing a name or an address. When OCR produces nothing the
-field reads `読み取れませんでした` / "Could not be read", and the value is corrected in the
-destination system after pasting.
+field reads `読み取れませんでした` / "Could not be read"; consult the physical card when
+recording the information elsewhere.
 
 ## The recognizer
 
@@ -117,18 +117,18 @@ failed read.
 ## What staff see when a field was not read
 
 The application has **no field for typing a name or an address**. The only editable input
-is the visible card number; everything else is read-only, reviewed, and copied. So "the
+is the visible card number; everything else is read-only and reviewed. So "the
 recognizer produced nothing" and "the recognizer produced something worth checking" call
 for different actions and are shown differently:
 
 | State | Field value | Notice |
 |---|---|---|
-| Nothing was read (`*_ocr_status` starts with `failed`) | `読み取れませんでした` / `Could not be read` | "This app has no field for typing a name — read it from the card and correct it where you paste." |
+| Nothing was read (`*_ocr_status` starts with `failed`) | `読み取れませんでした` / `Could not be read` | "This app has no field for typing a name — read it from the card when recording information elsewhere." |
 | Read, but review it | the candidate | "The name is OCR-derived. Please review it." |
 | Read, low confidence | the candidate | The review notice, plus the reason and the suggested alternative |
 
-Staff read the value from the card in front of them and correct it in the destination
-system after pasting. Nothing is typed into this application.
+Staff read the value from the card in front of them when recording information elsewhere.
+Nothing is typed into this application.
 
 All OCR is local: no image, text, model output, telemetry, or model request is sent to a
 cloud service, and no card image is written to disk at any point. If verification fails,

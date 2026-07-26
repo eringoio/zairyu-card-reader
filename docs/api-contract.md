@@ -4,9 +4,8 @@
 - `GET /api/local/status` — app version, local reader config, reader state, optional `?check_card=true` card state only.
 - `POST /api/local/config` — `{ "reader_id": 0 }`; no remote settings are accepted.
 - `POST /api/local/manual-scan` — `{ "reader_id": 0, "card_number": "AB12345678AJ", "use_mock": false }`.
-- `POST /api/local/copy-text` — `{ "cards": [{"card_number":"AB12345678AJ"}] }` returns `{ "success": true, "text": "在留カード番号\\t..." }`.
 
-Only the endpoints listed above are registered. Copy requests reject forbidden or unsupported keys, and display labels are always re-derived by the backend.
+Only the endpoints listed above are registered. Display labels are always derived by the backend.
 
 `GET /api/readers` and `POST /api/check-card` were removed: they duplicated data
 `/api/local/status` already returns, the staff UI never called them, and `check-card` took

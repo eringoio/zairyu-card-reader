@@ -46,8 +46,6 @@ Out of scope:
 - exposure to another process running as the same Windows user. The request token is
   embedded in a page this server serves over loopback; any process with that user's
   privileges can read it. That is inherent to a local service with no user accounts.
-- Windows clipboard history retaining copied text. This is disclosed in the UI in both
-  languages; the application cannot clear that history.
 - deliberately running the application outside its supported configuration — for example
   patching out the loopback check.
 - OCR misreading a name or an address. This is expected, documented, and the reason every

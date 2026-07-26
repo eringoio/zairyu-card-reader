@@ -43,7 +43,7 @@ def test_old_card_name_is_mapped_to_the_staff_review_field() -> None:
     assert fields["name_ocr_status"] == "completed_local_onnx_ocr"
 
 
-def test_old_card_parsed_fields_use_the_staff_copy_contract() -> None:
+def test_old_card_parsed_fields_use_the_staff_display_contract() -> None:
     parsed = {
         "name": "YAMADA TARO", "birth_date": "2000-01-02", "sex": "M",
         "nationality": "SAMPLELAND", "residence_status": "留学", "address": "東京都新宿区西新宿2-8-1",

@@ -16,7 +16,7 @@
         <div>
           <p class="eyebrow" data-i18n="eyebrow">ローカル在留カードリーダー</p>
           <h1 data-i18n="title">在留カードリーダー</h1>
-          <p class="subtitle" data-i18n="subtitle">カードを読み取り、内容を確認してコピーできます</p>
+          <p class="subtitle" data-i18n="subtitle">カードを読み取り、内容を確認できます</p>
         </div>
         <div class="topbar-actions">
           <div class="language-picker" role="group" aria-label="Language">
@@ -35,21 +35,17 @@
 
       <section class="panel workflow-panel" aria-labelledby="scanHeading">
         <div class="panel-heading"><div><p class="section-kicker" data-i18n="scan_kicker">このPCで読み取る</p><h2 id="scanHeading" data-i18n="scan_heading">在留カードの読み取り</h2></div></div>
-        <ol class="instruction-list"><li data-i18n="step_1">在留カードをリーダーに置きます</li><li data-i18n="step_2">カード表面の在留カード番号を入力します</li><li data-i18n="step_3">「読み取り開始」を押します</li><li data-i18n="step_4">読み取り結果を確認してコピーします</li></ol>
-        <aside class="privacy-notice"><strong data-i18n="privacy_title">プライバシーについて</strong><p data-i18n="privacy_text">本人の同意がある、確認を許可されたカードのみ読み取ってください。顔写真、マイナンバー、ICの生データは保存・コピーしません。必要な画像処理はメモリ上で行い、画像自体は出力しません。</p></aside>
+        <ol class="instruction-list"><li data-i18n="step_1">在留カードをリーダーに置きます</li><li data-i18n="step_2">カード表面の在留カード番号を入力します</li><li data-i18n="step_3">「読み取り開始」を押します</li><li data-i18n="step_4">読み取り結果をカードと照合します</li></ol>
+        <aside class="privacy-notice"><strong data-i18n="privacy_title">プライバシーについて</strong><p data-i18n="privacy_text">本人の同意がある、確認を許可されたカードのみ読み取ってください。顔写真、マイナンバー、ICの生データは保存・表示しません。必要な画像処理はメモリ上で行い、画像自体は出力しません。</p></aside>
         <div class="scan-form"><label class="field-label" for="cardNumber" data-i18n="card_number">在留カード番号（カード表面に印字）</label><input id="cardNumber" maxlength="12" autocomplete="off" placeholder="AB12345678AJ" aria-describedby="scanMessage"><label class="test-option"><input id="useMock" type="checkbox"><span data-i18n="sample_data">開発・テスト用サンプルデータを使う</span></label><p id="sampleHint" class="sample-hint" hidden></p><div class="actions"><button id="checkCard" type="button" class="secondary" data-i18n="check_card">カードを確認</button><button id="readCard" type="button" data-i18n="start_read">読み取り開始</button></div><p id="scanMessage" class="message" role="status" aria-live="polite"></p></div>
       </section>
 
       <section class="panel result-panel" id="resultBlock" hidden aria-labelledby="resultHeading">
-        <div class="panel-heading"><div><p class="section-kicker" data-i18n="result_kicker">確認してコピー</p><h2 id="resultHeading" data-i18n="result_heading">読み取り結果</h2></div><button id="discard" type="button" class="secondary" data-i18n="discard">破棄する</button></div>
+        <div class="panel-heading"><div><p class="section-kicker" data-i18n="result_kicker">確認</p><h2 id="resultHeading" data-i18n="result_heading">読み取り結果</h2></div><button id="discard" type="button" class="secondary" data-i18n="discard">破棄する</button></div>
         <div id="warnings" class="warnings" aria-live="polite"></div><table id="resultTable"></table>
-        <div class="actions result-actions"><button id="showOcrDebug" type="button" class="secondary" data-i18n="ocr_diagnostics">OCR診断を表示</button><button id="copyOne" type="button" data-i18n="copy_one">このカードをコピー</button><button id="addBatch" type="button" class="secondary" data-i18n="add_batch">一覧に追加</button></div>
+        <div class="actions result-actions"><button id="showOcrDebug" type="button" class="secondary" data-i18n="ocr_diagnostics">OCR診断を表示</button></div>
         <pre id="ocrDebug" class="ocr-debug" hidden></pre>
       </section>
-
-      <section class="panel batch-panel" id="batchBlock" hidden aria-labelledby="batchHeading"><div class="panel-heading"><div><p class="section-kicker" data-i18n="batch_kicker">ページを閉じると消去されます</p><h2 id="batchHeading"><span data-i18n="batch_heading">一時一覧</span> <span id="batchCount" class="count-badge"></span></h2></div><div class="actions"><button id="copyAll" type="button" data-i18n="copy_all">すべてコピー</button><button id="clearBatch" type="button" class="secondary" data-i18n="clear_batch">一覧を消去</button></div></div><div id="batchList" class="batch-list"></div></section>
-
-      <section class="clipboard-bar" aria-labelledby="clipboardHeading"><div><h2 id="clipboardHeading" data-i18n="clipboard_heading">コピー内容</h2><p data-i18n="clipboard_note">コピーした内容はWindowsのクリップボード履歴に残る場合があります。</p></div><div class="actions"><button id="showCopy" type="button" class="secondary" data-i18n="show_copy">コピー内容を表示</button><button id="clearClipboard" type="button" class="secondary" data-i18n="clear_clipboard">コピー内容を消去</button></div><textarea id="copyPreview" readonly hidden aria-label="Copied text"></textarea><p id="copyMessage" class="message" role="status" aria-live="polite"></p></section>
     </main>
     <script src="/static/local.js"></script>
   </body>

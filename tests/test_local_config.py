@@ -20,8 +20,8 @@ def test_invalid_config_falls_back_to_defaults(tmp_path):
 def test_no_card_data_can_be_persisted_to_local_settings(tmp_path):
     """Settings hold a reader index and a version. Never a scan, never a card field.
 
-    A card result written to disk would outlive the page that produced it and defeat the
-    "batch is cleared when the page closes" guarantee the UI gives staff.
+    A card result written to disk would outlive the page that produced it, even though
+    scan results are intended to exist only for the current page session.
     """
     path = tmp_path / "config.json"
     store = LocalConfigStore(path)

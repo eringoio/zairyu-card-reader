@@ -125,7 +125,7 @@ Decision: Keep the existing local FastAPI application and plain HTML/CSS/JavaScr
 host it in a native pywebview window using the Edge Chromium/WebView2 renderer by default.
 
 Reason: It removes browser chrome and the console from normal staff use without rewriting
-the proven reader, OCR, parsing, cryptographic, privacy, and copy-text workflows. The shell
+the proven reader, OCR, parsing, cryptographic, and privacy workflows. The shell
 starts or validates the loopback server by its additive health identity and stops only a
 server it owns.
 

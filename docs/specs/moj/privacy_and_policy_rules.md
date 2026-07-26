@@ -94,10 +94,9 @@ If enabled:
 
 ## Output rules
 
-These rules were originally written for a CSV export that no longer exists. They now govern
-the fixed Japanese tab-separated text staff copy, which is the only output this application
-produces. The allowlist and denylist below are unchanged and are enforced by
-`reader/policy.py` and the allowlist in `reader/local_api.py`.
+These rules govern reviewed staff fields displayed by the application. The allowlist and
+denylist below are enforced by `reader/policy.py` and the allowlist in
+`reader/local_api.py`.
 
 Output may include reviewed business fields only, for example:
 
@@ -143,7 +142,7 @@ front_image_data_url
 
 ## API sanitizer
 
-Before returning an API response or building copy text, recursively reject keys containing these substrings:
+Before returning an API response, recursively reject keys containing these substrings:
 
 ```text
 face_photo

@@ -16,7 +16,7 @@ argue the case before writing code; do not change it as a side effect of another
   application makes no outbound network request at runtime, ever. The only network call in
   the codebase is the launcher polling its own loopback health endpoint.
 - **Never store raw IC chip dumps**, and never expose raw APDU, TLV, or IC responses
-  through the UI, an API, a log, the clipboard, a file, or a diagnostic.
+  through the UI, an API, a log, a file, or a diagnostic.
 - **Never store or expose face photographs or card images.** The first-generation signature
   path reads the face image transiently because it is part of the signed target; those
   bytes never leave the verification function.
@@ -25,7 +25,7 @@ argue the case before writing code; do not change it as a side effect of another
 - **Specified residence cards (`07`/`08`), My Number application data, JPKI, and RSA
   delivery keys are out of scope.** RSA delivery key material is not distributed with this
   project and is never used for normal `05`/`06` cards.
-- Treat copied text and any manually exported file as sensitive.
+- Treat every reviewed card field and any manually created record as sensitive.
 
 There must be no configuration switch that turns any of the above off. A privacy rule with
 an off switch is a default, not a rule.
@@ -70,12 +70,11 @@ an off switch is a default, not a rule.
 
 ### Product scope
 
-- The staff workflow is: read a card, review exactly 17 fields, copy fixed Japanese
-  tab-separated text. The copy contract is the output — do not change it without a
-  demonstrated regression and updated fixtures.
+- The staff workflow is: read a card and review exactly 17 fields on screen. Do not add an
+  export or clipboard path without corresponding privacy review, documentation, and tests.
 - The only editable input in the UI is the visible card number. Names and addresses are
-  read-only; a value that could not be read is corrected in the destination system after
-  pasting, not in this application.
+  read-only; a value that could not be read is checked against the physical card outside
+  this application.
 - School-management integration, device pairing, job polling, remote submission, waiting
   mode, and CSV export are out of scope. They were removed deliberately.
 

@@ -11,10 +11,9 @@ workplace can decide whether the tool is acceptable.
 - Everything happens on one PC. **No card data ever leaves it over a network.**
 - The application makes **no outbound network request at runtime**, at all.
 - The only thing written to disk is which reader you selected.
-- Face photographs, card images, raw IC data, and My Number data are never stored, never
-  displayed, and never copied.
-- The one place card data does leave the application is **the Windows clipboard**, because
-  copying is the entire point of the tool. That has consequences — see below.
+- Face photographs, card images, raw IC data, and My Number data are never stored or
+  displayed.
+- Scan results are shown only in the current page and are discarded when the page closes.
 
 ## What is read from the card
 
@@ -23,7 +22,7 @@ card itself requires that number; it is the access key.
 
 | Read | Purpose | What happens to it |
 |---|---|---|
-| Structured business fields | The 17 reviewed fields | Shown on screen, copied when you choose |
+| Structured business fields | The 17 reviewed fields | Shown on screen only |
 | Name image | OCR only, when the card stores the name as an image | Processed in memory, never saved, never shown as an image |
 | Address image | OCR only, same | Processed in memory, never saved, never shown as an image |
 | Face image | **Signature verification only** | See below |
@@ -61,8 +60,7 @@ sanitisation.
 | `%LOCALAPPDATA%\ZairyuReader\BrowserProfile` | A dedicated browser profile used only for the application window, when Chromium app mode is used. No card data. |
 
 **No card data is written to disk.** Not the fields, not the images, not the certificates.
-Scan results and the temporary batch list live in the page's memory and disappear when the
-page closes.
+Scan results live in the page's memory and disappear when the page closes.
 
 Diagnostic traces are off by default and, when enabled, record structure only: APDU header
 bytes, status words, response *lengths*, TLV tags, and true/false field-presence flags.
@@ -82,16 +80,8 @@ Internet access is needed only twice, and never while reading a card:
 
 The released `.exe` bundles the model and needs neither.
 
-**Via the clipboard: the 17 reviewed fields, when you press copy.** This is deliberate. It
-is also the largest privacy consideration in normal use.
-
-> **Windows clipboard history and cloud clipboard sync may retain copied card data.** The
-> "clear" button in the application replaces the current clipboard contents, but Windows
-> does not allow an application to erase clipboard history. If clipboard sync is enabled,
-> Windows may have sent the text to your Microsoft account.
->
-> On any PC used to read residence cards, turn off clipboard history and cloud clipboard
-> sync: **Settings → System → Clipboard**.
+**No card data leaves the application.** It is displayed for staff review only and is not
+copied, exported, or written to disk by this application.
 
 ## Who can reach the application
 
@@ -114,7 +104,7 @@ The tool does not decide whether you may read a card. Before reading:
 - remember that residence-card data is personal information under Japan's Act on the
   Protection of Personal Information.
 
-Treat copied text and anything you paste it into as sensitive.
+Treat every reviewed card field and any information recorded from it as sensitive.
 
 ## When reporting a problem publicly
 

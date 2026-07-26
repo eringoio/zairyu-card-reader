@@ -165,22 +165,11 @@ def test_security_response_headers_are_present(client: TestClient) -> None:
 
 def test_an_oversized_declared_body_is_refused_before_it_is_read(client: TestClient) -> None:
     response = client.post(
-        "/api/local/copy-text",
+        "/api/local/config",
         headers=_auth({"Content-Type": "application/json", "Content-Length": str(64 * 1024 * 1024)}),
         content=b"{}",
     )
     assert response.status_code == 413
-
-
-def test_the_copy_batch_stays_bounded_by_its_schema(client: TestClient) -> None:
-    response = client.post(
-        "/api/local/copy-text",
-        json={"cards": [{"card_number": "AB12345678AJ"} for _ in range(101)]},
-        headers=_auth(),
-    )
-    assert response.status_code == 422
-
-
 # ------------------------------------------------------------- error redaction
 
 

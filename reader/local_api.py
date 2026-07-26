@@ -24,7 +24,6 @@ from reader.parsing.address_splitter import split_japanese_address
 from reader.pcsc import check_card_presence, list_readers
 from reader.policy import sanitize_response
 from reader.residence_card_reader import read_residence_card
-from reader.text_export import COPY_FIELDS, TextExportError, build_batch_text
 
 router = APIRouter(prefix="/api/local", tags=["local"])
 _config_store: LocalConfigStore | None = None
@@ -59,10 +58,6 @@ class ManualScanRequest(BaseModel):
     use_mock: bool = False
 
 
-class CopyTextRequest(BaseModel):
-    cards: list[dict[str, Any]] = Field(min_length=1, max_length=100)
-
-
 def _reader_status(reader_id: int) -> dict[str, Any]:
     listing = list_readers()
     readers = listing.get("readers", []) if listing.get("success") else []
@@ -77,7 +72,12 @@ def _prepare_staff_result(data: dict[str, Any], locale: str) -> dict[str, Any]:
     if safe.get("address_full") and not safe.get("address_prefecture"):
         safe.update(split_japanese_address(str(safe["address_full"])))
     safe.update(build_display_fields(safe, locale))
-    allowed = {key for _, key in COPY_FIELDS} | {
+    allowed = {
+        "card_number", "display_name", "birth_date", "display_sex", "nationality_label",
+        "residence_status_label", "display_period_of_stay", "residence_expiry_date",
+        "card_expiry_date", "permission_date", "address_prefecture", "address_municipality",
+        "address_other", "work_restriction_label", "display_qualification_activity_permission",
+        "display_qualification_activity_permission_detail", "display_signature_status",
         "name_ocr_candidate", "sex_code", "period_of_stay_raw", "period_of_stay_label",
         "comprehensive_permission_code", "comprehensive_permission_label", "individual_permission_code",
         "individual_permission_label", "signature_verification_status", "signature_verified",
@@ -185,11 +185,3 @@ def local_manual_scan(request: ManualScanRequest, accept_language: str | None = 
 
     return {"success": True, "stage": "manual_scan_ready", "message": translate("manual_scan.ready", locale),
             "data": _prepare_staff_result(data, locale)}
-
-
-@router.post("/copy-text")
-def local_copy_text(request: CopyTextRequest) -> dict[str, Any]:
-    try:
-        return {"success": True, "text": build_batch_text(request.cards)}
-    except TextExportError as exc:
-        return {"success": False, "error_code": "copy_text_invalid", "message": str(exc)}

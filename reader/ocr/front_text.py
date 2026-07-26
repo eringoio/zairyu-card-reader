@@ -400,7 +400,7 @@ def parse_front_ocr_text(text: str) -> dict[str, str]:
     # A real Japanese address can be safely anchored at a prefecture. The full-card
     # recognizer otherwise occasionally joins a neighbouring field and creates a
     # convincing-looking but invalid fragment. Keep an anchored suffix only; do not pass
-    # unclassified Han-only noise into the reviewed/copy fields.
+    # unclassified Han-only noise into the reviewed staff fields.
     address_prefecture_match = next(
         (re.search(re.escape(prefecture), address) for prefecture in PREFECTURES if prefecture in address),
         None,

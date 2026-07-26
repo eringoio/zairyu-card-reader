@@ -98,8 +98,8 @@ OCR engine by design; see [ocr.md](ocr.md).
 ## The name or address is wrong
 
 Expected, and the reason those fields must be reviewed. See the known limitations at the top
-of [ocr.md](ocr.md). Correct the value in the destination system after pasting; the
-application has no field for typing it.
+of [ocr.md](ocr.md). Consult the physical card when recording the information elsewhere;
+the application has no field for typing it.
 
 ## "Another read is already in progress"
 
@@ -131,18 +131,11 @@ Remember that a verified signature does not prove a card is currently valid, and
 unverified one does not by itself prove a card is fraudulent — a damaged read, an
 unsupported card generation, or an expired CA certificate all produce non-verified results.
 
-## Japanese text is garbled after pasting
-
-The copy output is plain UTF-8 tab-separated text with fixed Japanese labels. If the
-destination shows garbled characters, the receiving application is decoding it in a legacy
-Japanese code page rather than UTF-8. Paste into a UTF-8 text field, or set the receiving
-application's import encoding to UTF-8.
-
 ## Real residence-card reading fails while mock mode works
 
-Mock mode exercises the UI, the display fields, and the copy format without touching
-hardware, so this narrows the problem to the reader, the driver, the card, or the protocol
-path. Work through "Card reading fails with real card" below.
+Mock mode exercises the UI and display fields without touching hardware, so this narrows
+the problem to the reader, the driver, the card, or the protocol path. Work through "Card
+reading fails with real card" below.
 
 ## Card reading fails with real card
 

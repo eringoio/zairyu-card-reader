@@ -331,42 +331,6 @@ button.secondary:disabled {
   font-weight: 600;
 }
 
-.clipboard-fallback {
-  width: 100%;
-  min-height: 150px;
-  margin-top: 12px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
-.batch-block {
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-}
-
-.batch-count {
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.batch-list {
-  display: grid;
-  gap: 8px;
-  margin: 12px 0 16px;
-}
-
-.batch-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-}
-
-.batch-item p { margin: 2px 0; }
-.batch-item .warning { color: var(--warn); font-weight: 700; }
 
 .review-badge {
   display: inline-block;

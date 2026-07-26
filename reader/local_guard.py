@@ -28,8 +28,8 @@ LOOPBACK_HOSTNAMES = frozenset({"127.0.0.1", "localhost", "::1"})
 
 TOKEN_HEADER = "x-local-token"
 
-# The staff UI posts a small JSON batch; 1 MiB is far above the largest legitimate body
-# (100 cards of reviewed text fields) and far below anything worth buffering.
+# The staff UI posts only small configuration and scan requests. 1 MiB is far above the
+# largest legitimate body and far below anything worth buffering.
 MAX_REQUEST_BYTES = 1024 * 1024
 
 # Endpoints reachable without the token. `/api/health` must stay open because the desktop

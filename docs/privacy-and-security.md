@@ -125,7 +125,7 @@ without it.
 
 The application creates controlled mutable buffers for the face, image, signature and
 target values and overwrites them immediately after verification. None of them cross the
-API, the UI, the clipboard, diagnostics, or logs.
+API, the UI, diagnostics, or logs.
 
 **CPython memory erasure is best effort only.** Immutable values and copies made by the
 allocator or the interpreter cannot be proven erased. This is a documented mitigation, not
@@ -143,25 +143,11 @@ When file output is explicitly enabled, traces are written under the per-user da
 rather than the process working directory, which for a double-clicked executable is
 unpredictable.
 
-## The clipboard
-
-The clipboard is controlled by Windows, not by this application. Clearing it replaces the
-current clipboard text but **cannot** remove Windows clipboard history, and cloud clipboard
-sync may already have sent the text to a Microsoft account. The UI states this in both
-languages rather than implying the data has been erased.
-
-Turn off clipboard history and cloud sync on any PC used to read residence cards:
-**Settings → System → Clipboard**.
-
-The temporary batch and the copy preview live only in current page memory; reloading or
-closing the page clears them.
-
 ## What this does not defend against
 
 - A compromised Windows account, or another process running as the same user.
 - Physical access to an unlocked machine.
 - A malicious card. Signature verification confirms a cryptographic relationship; it does
   not confirm that a card is currently valid or has not been invalidated.
-- Anything downstream of the clipboard.
 
 Report a vulnerability privately — see [SECURITY.md](../SECURITY.md).

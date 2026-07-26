@@ -97,7 +97,6 @@ WebView2 or Chromium:     ____________________
 ### Sample-data path
 
 - [ ] A sample-data read filled all 17 fields with obviously synthetic values
-- [ ] The copy output pasted correctly into the destination system
 
 ### Real card — first generation (types `1`/`2`)
 
@@ -128,13 +127,6 @@ Tested?  yes / no / not available
 - [ ] Card removed mid-read produces a clear staff message, not a traceback
 - [ ] A second read attempted during a read is refused with `read_already_in_progress`
 - [ ] An invalid card number is rejected before any reader access
-
-### Clipboard
-
-- [ ] Copy produced the fixed 17-line tab-separated text
-- [ ] The clipboard warning about Windows clipboard history is visible in the UI
-- [ ] "Clear" replaced the clipboard contents
-- [ ] Confirmed that clipboard **history** still holds the earlier value — the UI does not claim otherwise
 
 ### Log and disk inspection after real reads
 

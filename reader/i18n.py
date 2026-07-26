@@ -17,7 +17,7 @@ def translate(key: str, locale: str = DEFAULT_LOCALE) -> str:
         "display.name.missing": {"ja": "未取得（OCR確認が必要）", "en": "Not detected; review OCR"},
         # Distinct from `missing`: the recognizer produced nothing, so there is nothing to
         # "review". This application has no field for typing a name, so staff read it from
-        # the card and correct it where they paste.
+        # the card and consult it when recording information elsewhere.
         "display.name.not_read": {"ja": "読み取れませんでした", "en": "Could not be read"},
         "display.sex.male": {"ja": "男性", "en": "Male"}, "display.sex.female": {"ja": "女性", "en": "Female"},
         "display.sex.other": {"ja": "その他", "en": "Other"}, "display.permission.yes": {"ja": "あり", "en": "Permitted"},

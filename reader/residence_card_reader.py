@@ -618,7 +618,7 @@ def _old_card_name_ocr_fields(parsed: dict[str, str], *, engine: str, model: str
 
 
 def _old_card_front_review_fields(parsed: dict[str, str], *, engine: str, model: str, confidence: float | None) -> dict[str, Any]:
-    """Translate parsed old-card labels into the reviewed staff/copy-field contract."""
+    """Translate parsed old-card labels into the reviewed staff-field contract."""
     address = str(parsed.get("address", ""))
     address_review = build_address_ocr_result(
         OcrResult(text=address, engine=engine, model=model, confidence=confidence)

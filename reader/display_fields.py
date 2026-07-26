@@ -68,7 +68,7 @@ def ocr_field_was_not_read(data: dict[str, Any], field: str) -> bool:
     """True when the local recognizer produced no candidate at all for this field.
 
     Worth distinguishing from a low-confidence result. This application has no editable
-    field for a name or an address — staff review what was read and copy it — so "nothing
+    field for a name or an address — staff review what was read — so "nothing
     was read" and "read, but check it" call for different actions and must not look alike.
     """
     return _text(data, f"{field}_ocr_status").startswith("failed")

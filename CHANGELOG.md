@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Privacy
+
+- Removed the clipboard and copy-text export workflow. Card data is now shown for review
+  only and remains in current page memory until it is discarded or the page closes.
+
 ### Security hardening for the public release
 
 - Removed the `Windows.Media.Ocr` fallback entirely. It wrote the preprocessed card image
@@ -64,5 +69,5 @@
 ## 0.2.0 — 2026-07-14
 
 - Refactored to a standalone local residence-card reader.
-- Removed remote integration, pairing, polling, direct submission, diagnostic browser UI, and JSON clipboard package.
-- Added local-only config migration and fixed Japanese tab-separated single/batch copy text.
+- Removed remote integration, pairing, polling, direct submission, and diagnostic browser UI.
+- Added local-only config migration.

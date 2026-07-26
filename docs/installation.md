@@ -125,7 +125,7 @@ See [ocr.md](ocr.md).
 | Installing Python dependencies (source only) | **Required, once** |
 | Staging the OCR model (source only) | **Required, once** |
 | Running the released package for the first time | Not required |
-| **Reading cards, verifying signatures, copying** | **Never required** |
+| **Reading cards and verifying signatures** | **Never required** |
 
 After setup, the application performs no outbound network request at all. The only network
 call it makes is to its own loopback health endpoint on `127.0.0.1`.
@@ -173,7 +173,7 @@ The port defaults to 8787 and can be changed with `--port`.
 2. The reader list shows your reader.
 3. With a card on the reader, **カードを確認 / Check card** reports the card as detected.
 4. Tick the sample-data option and read once: the 17 fields fill with obviously synthetic
-   values (`SAMPLE NAME`, `SAMPLELAND`). This confirms the UI and copy format work without
-   touching a real card.
+   values (`SAMPLE NAME`, `SAMPLELAND`). This confirms the UI works without touching a real
+   card.
 
 If step 2 or 3 fails, see [troubleshooting.md](troubleshooting.md).

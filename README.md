@@ -3,8 +3,7 @@
 **[日本語版 README →](README.ja.md)**
 
 A standalone Windows tool that reads a Japanese residence card (在留カード) locally, on one
-PC, using a USB NFC reader. Staff review exactly 17 fields and copy them as fixed
-Japanese tab-separated text.
+PC, using a USB NFC reader. Staff review exactly 17 fields on screen.
 
 Everything happens on the machine in front of you. There is no server, no account, no
 cloud, and no network traffic of any kind while a card is being read.
@@ -26,7 +25,6 @@ cloud, and no network traffic of any kind while a card is being read.
 - Verifies the card's digital signature against offline, packaged Immigration Services
   Agency certificates.
 - Displays 17 reviewed fields for a human to check.
-- Copies one card, or a small in-page batch, as fixed Japanese tab-separated text.
 
 ## What it does not do
 
@@ -53,7 +51,7 @@ driver behaviour, Windows Server 2016 support, or OCR quality on your hardware.
 
 Where a card stores the name or the address as an image rather than as text, the value is
 produced by local OCR. **Always check those fields against the card in front of you before
-copying.** Known problems include:
+using the result.** Known problems include:
 
 - spaces inserted at incorrect positions in names;
 - long names being partially cut off;
@@ -65,7 +63,7 @@ This project makes no claim of perfect OCR accuracy.
 
 The application has **no field for typing a name or an address**. The only thing you type is
 the card number. When OCR produces nothing, the field reads `読み取れませんでした` /
-"Could not be read" and you correct the value in the destination system after pasting.
+"Could not be read"; check the physical card when recording the information elsewhere.
 
 See [docs/ocr.md](docs/ocr.md).
 
@@ -158,17 +156,6 @@ Full details: [docs/building.md](docs/building.md) · [日本語](docs/building.
 4. Type the card number printed on the front of the card.
 5. Select **読み取り開始 / Start reading**.
 6. **Review all 17 fields against the card**, especially the name and the address.
-7. Copy one card, or add several to the temporary list and copy them together.
-
-The temporary list lives in page memory only and is cleared when the page closes.
-
-> **Clipboard warning.** Copied text goes to the Windows clipboard. Windows clipboard
-> history and cloud clipboard sync may retain it. The "clear" button replaces the current
-> clipboard contents but **cannot** remove Windows clipboard history. Turn clipboard history
-> off on shared machines.
-
-The copy format is 17 fixed `label<TAB>value` lines per card; see
-[docs/copy-paste-format.md](docs/copy-paste-format.md).
 
 ## Privacy and security
 
@@ -219,7 +206,6 @@ Note that `pyscard` is LGPL-2.1-or-later; the other dependencies are permissive.
 | Signature verification | [docs/signature-verification.md](docs/signature-verification.md) | — |
 | Official certificates | [docs/official-certificates.md](docs/official-certificates.md) | — |
 | Troubleshooting | [docs/troubleshooting.md](docs/troubleshooting.md) | — |
-| Copy format | [docs/copy-paste-format.md](docs/copy-paste-format.md) | — |
 | Architecture | [docs/architecture.md](docs/architecture.md) | — |
 | Local API contract | [docs/api-contract.md](docs/api-contract.md) | — |
 | Decision log | [docs/decision-log.md](docs/decision-log.md) | — |
