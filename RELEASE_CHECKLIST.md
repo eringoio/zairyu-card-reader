@@ -75,6 +75,10 @@ Archive SHA-256:   ____________________________________________________________
 
 ### Code signing
 
+Code signing is recommended, but it is not required for an unsigned release. If it is
+deferred, leave the signing boxes below unticked and include the unsigned-binary warning in
+the release notes.
+
 - [ ] A valid OV or EV code-signing certificate for the release publisher is available in
   `CurrentUser\My` or `LocalMachine\My`, with its private key accessible
 - [ ] The package was built with `-SignCertificateThumbprint <thumbprint>`; signing occurred
@@ -187,7 +191,8 @@ Scanner and result: ____________________________________________
 ## 11. Release notes
 
 - [ ] Version and archive SHA-256 included
-- [ ] Code-signing identity included, and a checksum published for the release archive
+- [ ] Code-signing identity included **or**, for an unsigned release, the unsigned-binary
+  warning included; in either case, a checksum is published for the release archive
 - [ ] "Distribute the whole folder, not just the .exe" stated
 - [ ] Supported Windows versions stated
 - [ ] Reader requirement stated: PC/SC, ISO/IEC 14443 **Type B**

@@ -167,6 +167,14 @@ Get-Content dist\zairyu-reader-0.2.1-windows-x64.zip.sha256
 
 ## 11. Code signing
 
+Code signing is recommended but not a release requirement. If you defer it, use the normal
+build command without signing parameters and include this statement in the release notes:
+
+> This executable is not code-signed. Windows may warn before running it. The published
+> SHA-256 confirms the exact archive downloaded, but does not establish who built it.
+
+Do not describe an unsigned release as signed or publisher-verified.
+
 Sign only with a real OV or EV code-signing certificate issued to the release publisher.
 Do not use a self-signed certificate or a certificate borrowed from another organisation.
 Import the certificate (or make its hardware-backed private key available) in either
@@ -192,10 +200,11 @@ archive SHA-256 still identifies the exact release download.
 
 ## 12. Release notes
 
-Include: the version; the SHA-256 of the archive; what changed; the code-signing identity;
-the requirement to keep the **whole folder** together; supported Windows versions; the reader
-requirement (PC/SC, ISO/IEC 14443 **Type B**); known OCR limitations with a pointer to
-[ocr.md](ocr.md); the signature-verification limitation; and the non-affiliation disclaimer.
+Include: the version; the SHA-256 of the archive; what changed; the code-signing identity
+or unsigned-binary warning; the requirement to keep the **whole folder** together; supported
+Windows versions; the reader requirement (PC/SC, ISO/IEC 14443 **Type B**); known OCR
+limitations with a pointer to [ocr.md](ocr.md); the signature-verification limitation; and
+the non-affiliation disclaimer.
 
 Do not include: any real card data, screenshots containing real data, hardware serial
 numbers, or internal names.
