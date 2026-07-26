@@ -6,18 +6,6 @@ This application reads personal data from Japanese residence cards. Please treat
 finding that could expose card data, face images, IC-chip material, or the loopback API as
 sensitive.
 
-## 日本語の要約
-
-本アプリは在留カードの個人情報を扱います。カード情報、顔画像、ICチップのデータ、または
-ローカルAPIの露出につながる問題は、機微な内容として扱ってください。
-
-**脆弱性は公開のIssueに投稿しないでください。** GitHub の非公開の脆弱性報告機能
-（Security → Report a vulnerability）をご利用ください。報告には、**実在のカード情報、氏名、
-住所、生年月日、在留カード番号を絶対に含めないでください。** テストと同様に合成データを
-使用してください。
-
-対象範囲、対象外、および本アプリが防御しないものについては、以下の英語の記載をご覧ください。
-
 ## Reporting a vulnerability
 
 **Do not open a public issue** for a vulnerability that could expose card data. Use GitHub's
