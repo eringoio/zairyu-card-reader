@@ -29,6 +29,9 @@ updates:
       # ceiling on every direct dependency for the same reason.
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+      # pydantic pins its matching core release exactly. Updating the transitive package
+      # alone produces an unsatisfiable lockfile; it is updated with pydantic instead.
+      - dependency-name: "pydantic-core"
 
   - package-ecosystem: github-actions
     directory: "/"
