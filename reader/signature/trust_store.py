@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import zipfile
 from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
@@ -152,16 +151,6 @@ def load_second_generation_trust_anchor(path: Path = MANIFEST_PATH) -> TrustAnch
         return ca2
     status = failures[0] if failures else "missing"
     raise TrustStoreError("Second-generation production trust anchor unavailable.", status=status)
-
-
-def compare_archive_and_historical_certificate(archive_path: Path, historical_path: Path) -> bool:
-    """Return true only if the archive's sole certificate is byte-for-byte identical."""
-    with zipfile.ZipFile(archive_path) as archive:
-        members = [member for member in archive.infolist() if not member.is_dir()]
-        if len(members) != 1:
-            raise TrustStoreError("Official certificate archive did not contain exactly one certificate.")
-        archive_bytes = archive.read(members[0])
-    return archive_bytes == historical_path.read_bytes()
 
 
 def _extension(certificate: x509.Certificate, extension_type):

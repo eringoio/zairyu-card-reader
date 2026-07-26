@@ -25,12 +25,12 @@ It does NOT apply to material published by third parties that is distributed wit
 or alongside this project. In particular:
 
   * Public key certificates published by the Immigration Services Agency of Japan,
-    under resources/moj/trust-anchors/ and docs/external/moj/certs/. These remain
+    under resources/moj/trust-anchors/. These remain
     subject to the terms of their publisher. See docs/official-certificates.md.
 
   * The PP-OCRv6 recognition model and its metadata, which are licensed under the
     Apache License 2.0 by their own authors and are not tracked in this repository.
-    See docs/third-party-notices.md.
+    See THIRD_PARTY_NOTICES.md.
 
   * Any dependency installed from a package index, each under its own licence.
 
