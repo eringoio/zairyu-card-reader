@@ -20,4 +20,4 @@ ruff>=0.6,<1
 
 # Dependency vulnerability auditing. Queries the PyPI advisory database with package names
 # and versions only; it does not upload source.
-pip-audit>=2.7,<3
+pip-audit>=2.10.1,<3
