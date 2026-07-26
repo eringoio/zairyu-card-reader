@@ -81,7 +81,7 @@ build output.
 ## 5. Tests
 
 ```powershell
-pytest -q
+pytest -q --basetemp=.pytest-tmp
 ruff check .
 ```
 

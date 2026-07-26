@@ -67,7 +67,10 @@ if (-not $?) { throw "The local health contract check failed." }
 
 if (-not $SkipTests) {
     Write-Host "`n== Running the test suite =="
-    & $Python -m pytest -q
+    # Some locked-down Windows profiles deny pytest access to its default directory under
+    # %LOCALAPPDATA%\Temp. Keep test scratch data in this ignored repository directory so
+    # the release gate remains usable without weakening the test suite.
+    & $Python -m pytest -q --basetemp=.pytest-tmp
     if (-not $?) { throw "Tests failed. Fix them before building a distribution." }
 }
 
