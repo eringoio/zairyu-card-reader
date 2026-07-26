@@ -2,7 +2,7 @@
 
 `zairyu-card-reader 0.2.1`
 
-The application is one staff-facing local screen. It selects a PC/SC reader, checks a card, performs a real or explicitly enabled development mock scan, displays exactly 17 staff fields, shows separate OCR/signature review warnings, and copies one or multiple cards as fixed Japanese tab-separated text. The normal Windows package starts the local FastAPI process on `127.0.0.1:8787` and displays that screen in WebView2 on supported desktop Windows, or in installed Chromium app mode on Windows Server 2016 and after WebView2 startup failure.
+The application is one staff-facing local screen. It selects a PC/SC reader, checks a card, performs a real or explicitly enabled development mock scan, displays exactly 17 staff fields, and shows separate OCR/signature review warnings. Results are review-only and remain in current page memory. The normal Windows package starts the local FastAPI process on `127.0.0.1:8787` and displays that screen in WebView2 on supported desktop Windows, or in installed Chromium app mode on Windows Server 2016 and after WebView2 startup failure.
 
 The app has no remote dashboard or browser diagnostic surface. Existing legacy configurations are replaced by local-only configuration while preserving `reader_id`. `--chrome-app` and `--webview` force the two application-style shells. `--browser` is a last fallback and `--no-browser`/legacy `--headless` are server-only modes; neither is the normal staff launch path.
 

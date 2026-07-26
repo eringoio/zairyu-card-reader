@@ -1,7 +1,11 @@
 # Standalone refactor through prompt 07
 
-The runtime was reduced to local reader selection, manual scan, and fixed text copy. Remote integration and the advanced browser surface were removed. The new config migrates an old JSON file by preserving reader ID only and overwriting it with local-only settings; this is replacement, not forensic erasure.
+> Historical note. The clipboard/text-export workflow described below was removed on
+> 2026-07-26. The current application displays results for review only.
 
-Copy text is generated only on the backend from an allowlisted raw-field input and backend-derived display values. It has the fixed 17-field order, is batch-capable, and rejects unsupported/forbidden content before output.
+The runtime was reduced to local reader selection and manual scan. Remote integration and
+the advanced browser surface were removed. The new config migrates an old JSON file by
+preserving reader ID only and overwriting it with local-only settings; this is replacement,
+not forensic erasure.
 
 The current environment did not contain Python or pytest, so full automated and Windows hardware/build verification remains documented as pending.

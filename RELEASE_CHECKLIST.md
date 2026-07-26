@@ -73,6 +73,21 @@ Distribution size: ____________ MiB
 Archive SHA-256:   ____________________________________________________________
 ```
 
+### Code signing
+
+- [ ] A valid OV or EV code-signing certificate for the release publisher is available in
+  `CurrentUser\My` or `LocalMachine\My`, with its private key accessible
+- [ ] The package was built with `-SignCertificateThumbprint <thumbprint>`; signing occurred
+  before the archive was created
+- [ ] SignTool Authenticode verification passed during the build
+- [ ] A trusted RFC 3161 timestamp was applied
+
+```text
+Certificate subject: _________________________________________________________
+Certificate issuer:  _________________________________________________________
+Timestamp service:   _________________________________________________________
+```
+
 ## 7. Manual hardware and OCR checks
 
 **The automated suite proves none of this.** Run these with authorised cards on the target
@@ -168,7 +183,7 @@ Scanner and result: ____________________________________________
 ## 11. Release notes
 
 - [ ] Version and archive SHA-256 included
-- [ ] **Unsigned-binary warning included**, stating that a checksum proves what was downloaded, not who built it
+- [ ] Code-signing identity included, and a checksum published for the release archive
 - [ ] "Distribute the whole folder, not just the .exe" stated
 - [ ] Supported Windows versions stated
 - [ ] Reader requirement stated: PC/SC, ISO/IEC 14443 **Type B**

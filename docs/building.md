@@ -75,8 +75,10 @@ time. One-folder avoids both.
 Copy the whole `dist\zairyu-reader` folder. `zairyu-reader.exe` will not run without the
 `_internal` folder beside it.
 
-The executable is unsigned. Windows SmartScreen will warn on first run on a machine that has
-not seen it before. Code signing is the maintainer's decision and is not part of this build.
+For a public release, build with the optional Authenticode signing parameters documented in
+[releasing.md](releasing.md). The signing step runs before the archive is created and
+verifies the signature. Without those parameters the executable is deliberately unsigned,
+and Windows SmartScreen may warn on first run.
 
 ## Windows Server 2016
 

@@ -165,26 +165,34 @@ Get-FileHash -Algorithm SHA256 dist\zairyu-reader-0.2.1-windows-x64.zip
 Get-Content dist\zairyu-reader-0.2.1-windows-x64.zip.sha256
 ```
 
-## 11. The unsigned-binary warning
+## 11. Code signing
 
-**The executable is unsigned.** Windows SmartScreen will warn on first run on any machine
-that has not seen it before.
+Sign only with a real OV or EV code-signing certificate issued to the release publisher.
+Do not use a self-signed certificate or a certificate borrowed from another organisation.
+Import the certificate (or make its hardware-backed private key available) in either
+`CurrentUser\My` or `LocalMachine\My`, then build and sign in one operation:
 
-State this in the release notes, and state it honestly:
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\build_windows.ps1 `
+  -UseLockfile -Package -Version 0.2.1 `
+  -SignCertificateThumbprint <40-hex-thumbprint> `
+  -SignCertificateStoreLocation CurrentUser
+```
 
-> This executable is not code-signed. Windows will warn you before running it. A checksum
-> confirms that the file you downloaded is the file that was published — it does **not**
-> establish who built it or that the build is safe.
+The build invokes SignTool after PyInstaller creates `zairyu-reader.exe`, applies a SHA-256
+Authenticode signature with an RFC 3161 timestamp, verifies that signature, and only then
+creates the ZIP. By default it uses DigiCert's public timestamp service; pass
+`-TimestampServer <URL>` to use your certificate provider's required service, or
+`-SignToolPath <path>` when the Windows SDK Signing Tools are not on `PATH`.
 
-**An unsigned binary is not trustworthy merely because its source is public.** Nothing ties
-a downloaded `.exe` to any particular source tree. Anyone who needs real assurance should
-build it themselves from a clean checkout, or you should sign it with an actual
-code-signing identity. Do not sign with anything other than a real maintainer-provided
-identity.
+Keep the signing certificate and private key out of the repository, build directory,
+archive, logs, and release notes. Record only the public certificate subject, issuer, and
+timestamp service in the release checklist. A signature identifies the publisher; the
+archive SHA-256 still identifies the exact release download.
 
 ## 12. Release notes
 
-Include: the version; the SHA-256 of the archive; what changed; the unsigned-binary warning;
+Include: the version; the SHA-256 of the archive; what changed; the code-signing identity;
 the requirement to keep the **whole folder** together; supported Windows versions; the reader
 requirement (PC/SC, ISO/IEC 14443 **Type B**); known OCR limitations with a pointer to
 [ocr.md](ocr.md); the signature-verification limitation; and the non-affiliation disclaimer.

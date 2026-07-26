@@ -19,12 +19,76 @@ param(
     [switch]$UseLockfile,
     [switch]$Package,
     [string]$Version = "0.2.1",
-    [string]$Python = ""
+    [string]$Python = "",
+    [string]$SignCertificateThumbprint = "",
+    [ValidateSet("CurrentUser", "LocalMachine")]
+    [string]$SignCertificateStoreLocation = "CurrentUser",
+    [string]$TimestampServer = "http://timestamp.digicert.com",
+    [string]$SignToolPath = ""
 )
 
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 Set-Location $repoRoot
+
+function Resolve-SignTool {
+    if (-not [string]::IsNullOrWhiteSpace($SignToolPath)) {
+        if (-not (Test-Path -LiteralPath $SignToolPath -PathType Leaf)) {
+            throw "SignTool was not found at the supplied -SignToolPath: $SignToolPath"
+        }
+        return (Resolve-Path -LiteralPath $SignToolPath).Path
+    }
+
+    $command = Get-Command signtool.exe -ErrorAction SilentlyContinue
+    if ($null -ne $command) { return $command.Source }
+
+    $kitsRoot = Join-Path ${env:ProgramFiles(x86)} "Windows Kits\10\bin"
+    if (Test-Path -LiteralPath $kitsRoot) {
+        $candidate = Get-ChildItem -Path $kitsRoot -Filter "signtool.exe" -File -Recurse -ErrorAction SilentlyContinue |
+            Where-Object { $_.Directory.Name -eq "x64" } |
+            Sort-Object FullName -Descending |
+            Select-Object -First 1
+        if ($null -ne $candidate) { return $candidate.FullName }
+    }
+
+    throw "SignTool was not found. Install the Windows SDK Signing Tools or pass -SignToolPath."
+}
+
+function Sign-ReleaseExecutable {
+    param([string]$ExecutablePath)
+
+    if ([string]::IsNullOrWhiteSpace($SignCertificateThumbprint)) { return $false }
+    $thumbprint = ($SignCertificateThumbprint -replace '[^0-9A-Fa-f]', '').ToUpperInvariant()
+    if ($thumbprint.Length -ne 40) {
+        throw "-SignCertificateThumbprint must be a SHA-1 certificate thumbprint (40 hexadecimal characters)."
+    }
+
+    $certificatePath = "Cert:\$SignCertificateStoreLocation\My\$thumbprint"
+    if (-not (Test-Path -LiteralPath $certificatePath)) {
+        throw "No certificate with thumbprint $thumbprint and an accessible private key was found in $SignCertificateStoreLocation\\My."
+    }
+    $certificate = Get-Item -LiteralPath $certificatePath
+    if (-not $certificate.HasPrivateKey) {
+        throw "The certificate $thumbprint does not have an accessible private key."
+    }
+    if ([string]::IsNullOrWhiteSpace($TimestampServer)) {
+        throw "-TimestampServer is required when signing so the signature remains verifiable after certificate expiry."
+    }
+
+    $signTool = Resolve-SignTool
+    $arguments = @("sign", "/fd", "SHA256", "/sha1", $thumbprint, "/s", "My", "/tr", $TimestampServer, "/td", "SHA256")
+    if ($SignCertificateStoreLocation -eq "LocalMachine") { $arguments += "/sm" }
+    $arguments += $ExecutablePath
+
+    Write-Host "`n== Signing the release executable =="
+    & $signTool @arguments
+    if (-not $?) { throw "Authenticode signing failed." }
+
+    Write-Host "`n== Verifying the Authenticode signature =="
+    & $signTool verify /pa /all /v $ExecutablePath
+    if (-not $?) { throw "Authenticode signature verification failed." }
+    return $true
+}
 
 if ([string]::IsNullOrWhiteSpace($Python)) {
     if (Test-Path ".venv\Scripts\python.exe") {
@@ -98,6 +162,7 @@ if (-not $?) { throw "PyInstaller build failed." }
 
 $exe = Join-Path $repoRoot "dist\zairyu-reader\zairyu-reader.exe"
 if (-not (Test-Path $exe)) { throw "Expected build output not found: $exe" }
+$releaseIsSigned = Sign-ReleaseExecutable -ExecutablePath $exe
 
 Write-Host "`n== Verifying bundled runtime resources =="
 $bundled = @(
@@ -173,10 +238,14 @@ Write-Host "`n== IMPORTANT =="
 Write-Host "Distribute the WHOLE dist\zairyu-reader folder. zairyu-reader.exe will not run"
 Write-Host "without the _internal folder beside it."
 Write-Host ""
-Write-Host "This executable is UNSIGNED. Windows SmartScreen will warn on first run."
-Write-Host "An unsigned binary is not trustworthy merely because its source is public:"
-Write-Host "nothing ties this file to that source. Recipients who need assurance should"
-Write-Host "build it themselves, or you should sign it with a real code-signing identity."
+if ($releaseIsSigned) {
+    Write-Host "The executable is Authenticode-signed and timestamped."
+} else {
+    Write-Host "This executable is UNSIGNED. Windows SmartScreen will warn on first run."
+    Write-Host "An unsigned binary is not trustworthy merely because its source is public:"
+    Write-Host "nothing ties this file to that source. Recipients who need assurance should"
+    Write-Host "build it themselves, or you should sign it with a real code-signing identity."
+}
 Write-Host "Verify the archive checksum against the one published with the release."
 Write-Host "Staff launch:   double-click zairyu-reader.exe (WebView2 or Chromium app window)"
 Write-Host "Chrome app mode: zairyu-reader.exe --chrome-app"

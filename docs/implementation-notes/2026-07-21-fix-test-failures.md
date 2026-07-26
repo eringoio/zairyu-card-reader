@@ -19,16 +19,13 @@ Recent launcher, signature-verification, trust-store, and documentation cleanup 
 - **Invalid certificate status:** Changed the assertion in `test_parse_rc2_residence_card_business_fields` from `certificate_unavailable` to `certificate_invalid` to properly reflect that the certificate is present but synthetically invalid.
 - **Tampered printed entries:** Modified `test_tampered_printed_entries_fail_verification` to replace a specific authenticated value inside `PRINTED_ENTRIES` rather than wiping all TLV formatting, maintaining the expected 53-byte structure.
 - **Unknown CA assertion:** Corrected `test_certificate_issued_by_an_unknown_ca_is_not_trusted` to expect `signature_verified` to be `None` rather than `False` since signatures are not verified when the certificate chain is untrusted.
-- **Stable fixtures:** Restored the single and multi-card golden text-export fixtures to a new stable test directory (`tests/fixtures/text_export/`) and modified `tests/test_text_export.py` to resolve paths relative to `__file__`. Updated the expected labels from the old `署名検証: 確認済み` to the current `真正性確認: 確認済み` format to match the localized i18n changes in the codebase.
+- **Historical export fixtures:** Restored the single and multi-card golden text-export fixtures. The clipboard/export workflow and these fixtures were removed on 2026-07-26 when the application became review-only.
 
 ## Files changed
 
 - [tests/test_launcher.py](../../tests/test_launcher.py)
 - [tests/test_second_generation_fields.py](../../tests/test_second_generation_fields.py)
 - [tests/test_signature.py](../../tests/test_signature.py)
-- [tests/test_text_export.py](../../tests/test_text_export.py)
-- [tests/fixtures/text_export/single_card_expected.txt](../../tests/fixtures/text_export/single_card_expected.txt)
-- [tests/fixtures/text_export/multi_card_expected.txt](../../tests/fixtures/text_export/multi_card_expected.txt)
 
 ## Checks run
 

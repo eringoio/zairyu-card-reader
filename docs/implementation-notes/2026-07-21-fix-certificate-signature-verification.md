@@ -41,8 +41,7 @@ Additionally, newer versions of `cryptography` (which use a strict Rust-backed A
 - `zairyu-reader.spec`
 - `tests/test_certificate_encoding.py` (New file)
 - `tests/test_first_generation_signature.py`
-- `tests/fixtures/text_export/single_card_expected.txt` (Restored)
-- `tests/fixtures/text_export/multi_card_expected.txt` (Restored)
+- Historical text-export fixtures (later removed with the clipboard/export workflow)
 
 ## Checks run
 

@@ -1,5 +1,8 @@
 # Multilingual staff UI refresh
 
-The standalone screen now uses the original app's calmer card-based visual hierarchy without restoring any removed remote or diagnostic controls. It has a header language control, reader readiness summary, guided scan area, review table, temporary batch, and persistent clipboard controls.
+> Historical note. The temporary batch and clipboard controls mentioned in the original
+> implementation were removed on 2026-07-26. The current screen is review-only.
 
-Japanese and English are selected for the current page only; the choice is not persisted. Exported text remains the fixed Japanese-label format because that is the defined copy/paste contract. No reader, privacy, storage, or export behavior changed.
+The standalone screen now uses the original app's calmer card-based visual hierarchy without restoring any removed remote or diagnostic controls. It has a header language control, reader readiness summary, guided scan area, and review table.
+
+Japanese and English are selected for the current page only; the choice is not persisted.
