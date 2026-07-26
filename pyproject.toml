@@ -92,5 +92,9 @@ known-first-party = ["reader", "app", "launch_reader"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# Keep top-level application modules importable whether tests are launched through
+# `pytest` or `python -m pytest`. Pytest 9's console-script import path differs on
+# some Windows installations; the project is intentionally not an installed package.
+pythonpath = ["."]
 # Tests must never require a reader, a card, a network connection, or a smart-card service.
 addopts = "-q"
