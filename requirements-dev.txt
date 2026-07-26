@@ -9,7 +9,7 @@
 
 # Test suite. Also provides the ASGI test client used by the web-security tests.
 pytest>=8,<10
-httpx>=0.27,<1
+httpx>=0.28.1,<1
 
 # Windows packaging. GPL-2.0-or-later with a bootloader exception; see
 # THIRD_PARTY_NOTICES.md.
