@@ -23,7 +23,7 @@ pyscard>=2.0,<3
 pycryptodome>=3.20,<4
 
 # Certificate parsing and RSA/ECDSA signature verification.
-cryptography>=42,<50
+cryptography>=50,<51
 pyasn1>=0.6,<0.7
 pyasn1-modules>=0.4,<0.5
 
