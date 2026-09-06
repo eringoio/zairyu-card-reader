@@ -14,7 +14,7 @@
 
 # Local HTTP application and server.
 fastapi>=0.141.1,<1
-uvicorn[standard]>=0.52.1,<1
+uvicorn[standard]>=0.52.4,<1
 
 # PC/SC card reader access. LGPL-2.1-or-later; see THIRD_PARTY_NOTICES.md.
 pyscard>=2.0,<3
@@ -30,7 +30,7 @@ pyasn1-modules>=0.4,<0.5
 # Local OCR: image preprocessing and ONNX Runtime CPU inference.
 pillow>=10,<14
 onnxruntime>=1.17,<2
-numpy>=1.24,<3
+numpy>=2.5.2,<3
 PyYAML>=6,<7
 
 # The WebView2 desktop window.
